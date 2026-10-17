@@ -1,8 +1,8 @@
 {
   "status": "official",
   "source": "https://api.portaldatransparencia.gov.br/api-de-dados/despesas/por-orgao",
-  "generated_at": "2026-10-17T02:52:26+00:00",
-  "scope": "Selected orgaoSuperior codes 26000; up to 1 page(s) per code, not national totals",
+  "generated_at": "2026-10-17T03:12:48+00:00",
+  "scope": "Partial CGU API sample: 26000, 25000 (orgaoSuperior); up to 2 page(s) per code; 4 request(s). Not complete national expenditure.",
   "year": 2025,
   "records": [
     {
@@ -124,6 +124,210 @@
       "empenhado": 2456048215.8,
       "liquidado": 2320873002.35,
       "pago": 2081922450.19
+    },
+    {
+      "codigo": "26233",
+      "orgao": "Universidade Federal do Ceará",
+      "ano": 2025,
+      "empenhado": 2357224884.12,
+      "liquidado": 2274568046.21,
+      "pago": 2053684740.78
+    },
+    {
+      "codigo": "26239",
+      "orgao": "Universidade Federal do Pará",
+      "ano": 2025,
+      "empenhado": 2183835196.87,
+      "liquidado": 2135339096.07,
+      "pago": 1924835156.36
+    },
+    {
+      "codigo": "26247",
+      "orgao": "Universidade Federal de Santa Maria",
+      "ano": 2025,
+      "empenhado": 2007895255.44,
+      "liquidado": 1952753877.84,
+      "pago": 1774129266.63
+    },
+    {
+      "codigo": "26274",
+      "orgao": "Fundação Universidade Federal de Uberlândia",
+      "ano": 2025,
+      "empenhado": 1962256730.82,
+      "liquidado": 1947113794.26,
+      "pago": 1749758059.61
+    },
+    {
+      "codigo": "26262",
+      "orgao": "Universidade Federal de São Paulo",
+      "ano": 2025,
+      "empenhado": 1930084382.68,
+      "liquidado": 1855159515.37,
+      "pago": 1701519837.52
+    },
+    {
+      "codigo": "26235",
+      "orgao": "Universidade Federal de Goiás",
+      "ano": 2025,
+      "empenhado": 1855400916.54,
+      "liquidado": 1813052306.45,
+      "pago": 1639121547.24
+    },
+    {
+      "codigo": "26000",
+      "orgao": "Ministério da Educação - Unidades com vínculo direto",
+      "ano": 2025,
+      "empenhado": 1970028281.58,
+      "liquidado": 1682518566.0,
+      "pago": 1617242631.61
+    },
+    {
+      "codigo": "26439",
+      "orgao": "Instituto Federal de Educação, Ciência e Tecnologia de São Paulo",
+      "ano": 2025,
+      "empenhado": 1803973360.75,
+      "liquidado": 1665380441.17,
+      "pago": 1515526874.56
+    },
+    {
+      "codigo": "26234",
+      "orgao": "Universidade Federal do Espírito Santo",
+      "ano": 2025,
+      "empenhado": 1596510653.17,
+      "liquidado": 1515523371.66,
+      "pago": 1366346814.76
+    },
+    {
+      "codigo": "26258",
+      "orgao": "Universidade Tecnológica Federal do Paraná",
+      "ano": 2025,
+      "empenhado": 1464137024.63,
+      "liquidado": 1382441630.26,
+      "pago": 1286857512.84
+    },
+    {
+      "codigo": "26237",
+      "orgao": "Universidade Federal de Juiz de Fora",
+      "ano": 2025,
+      "empenhado": 1517335668.21,
+      "liquidado": 1394614728.46,
+      "pago": 1265601872.29
+    },
+    {
+      "codigo": "26231",
+      "orgao": "Universidade Federal de Alagoas",
+      "ano": 2025,
+      "empenhado": 1423124059.59,
+      "liquidado": 1374448479.24,
+      "pago": 1241011883.82
+    },
+    {
+      "codigo": "26283",
+      "orgao": "Fundação Universidade Federal do Mato Grosso do Sul",
+      "ano": 2025,
+      "empenhado": 1326710578.51,
+      "liquidado": 1283848572.15,
+      "pago": 1207697672.23
+    },
+    {
+      "codigo": "26272",
+      "orgao": "Fundação Universidade do Maranhão",
+      "ano": 2025,
+      "empenhado": 1369933091.02,
+      "liquidado": 1316633846.21,
+      "pago": 1202293245.93
+    },
+    {
+      "codigo": "26282",
+      "orgao": "Universidade Federal de Viçosa",
+      "ano": 2025,
+      "empenhado": 1306907497.28,
+      "liquidado": 1261208949.37,
+      "pago": 1133501491.5
+    },
+    {
+      "codigo": "25000",
+      "orgao": "Ministério da Fazenda - Unidades com vínculo direto",
+      "ano": 2025,
+      "empenhado": 2705440481687.08,
+      "liquidado": 2657643212890.84,
+      "pago": 2656616391805.59
+    },
+    {
+      "codigo": "25915",
+      "orgao": "Fundo Constitucional do Distrito Federal",
+      "ano": 2025,
+      "empenhado": 25185937641.75,
+      "liquidado": 24687531215.9,
+      "pago": 23793803446.9
+    },
+    {
+      "codigo": "25801",
+      "orgao": "Receita Federal do Brasil",
+      "ano": 2025,
+      "empenhado": 11714435606.08,
+      "liquidado": 2880289141.23,
+      "pago": 2860917629.84
+    },
+    {
+      "codigo": "25901",
+      "orgao": "Fundo de Compensação de Variações Salariais",
+      "ano": 2025,
+      "empenhado": 927559374.1,
+      "liquidado": 743035873.1,
+      "pago": 679473856.1
+    },
+    {
+      "codigo": "25914",
+      "orgao": "Fundo de Garantia à Exportação",
+      "ano": 2025,
+      "empenhado": 620334568.33,
+      "liquidado": 544519726.77,
+      "pago": 544519726.77
+    },
+    {
+      "codigo": "25208",
+      "orgao": "Superintendência de Seguros Privados",
+      "ano": 2025,
+      "empenhado": 294451142.7,
+      "liquidado": 284923754.85,
+      "pago": 260571086.86
+    },
+    {
+      "codigo": "25203",
+      "orgao": "Comissão de Valores Mobiliários",
+      "ano": 2025,
+      "empenhado": 268007690.78,
+      "liquidado": 252084028.17,
+      "pago": 222814115.31
+    },
+    {
+      "codigo": "25904",
+      "orgao": "Fundo de Estabilidade do Seguro Rural",
+      "ano": 2025,
+      "empenhado": 16661963.4,
+      "liquidado": 16661963.4,
+      "pago": 16661963.4
     }
-  ]
+  ],
+  "coverage": {
+    "orgao_superior_codes": [
+      "26000",
+      "25000"
+    ],
+    "page_limit_per_code": 2,
+    "requested_pages": 4,
+    "pages_with_data": [
+      {
+        "orgao_superior": "26000",
+        "pages_with_data": 2
+      },
+      {
+        "orgao_superior": "25000",
+        "pages_with_data": 1
+      }
+    ],
+    "record_count": 38,
+    "complete": false
+  }
 }
