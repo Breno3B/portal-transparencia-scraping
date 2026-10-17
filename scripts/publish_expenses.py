@@ -7,6 +7,7 @@ import os
 import pathlib
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -87,11 +88,23 @@ def main():
     if not 2013<=year<=datetime.now(timezone.utc).year:raise ValueError("Invalid CGU_YEAR")
     if not codes or len(codes)>5 or any(not re.fullmatch(r"\d{4,8}",c) for c in codes):raise ValueError("CGU_ORGAOS must contain 1-5 SIAFI numeric codes")
     if not 1<=pages<=3:raise ValueError("CGU_MAX_PAGES must be 1-3")
+    # Use a small, bounded request budget. A delay reduces the chance
+    # of breaching provider request-rate limits.
+    pause=float(os.getenv("CGU_REQUEST_DELAY_SECONDS","1.5"))
+    if not 1 <= pause <= 10:
+        raise ValueError("CGU_REQUEST_DELAY_SECONDS must be between 1 and 10")
     records=[]
+    seen=set()
+    fetches=[]
+    requests=0
     for code in codes:
+        fetched_pages=0
         for page in range(1,pages+1):
+            if requests:
+                time.sleep(pause)
             query=urllib.parse.urlencode({"ano":year,"orgaoSuperior":code,"pagina":page})
             req=urllib.request.Request(API+"?"+query,headers={"chave-api-dados":key,"Accept":"application/json","User-Agent":"Breno3B-educational-open-data-dashboard/1.0"})
+            requests += 1
             try:
                 with urllib.request.urlopen(req,timeout=35) as res:
                     payload=json.load(res)
@@ -106,10 +119,37 @@ def main():
                     f"CGU API connection failed ({type(exc.reason).__name__}); "
                     "previous snapshot preserved"
                 ) from exc
-            if payload==[]:break
-            records.extend(normalize(payload,year,code))
-    if not records:raise ValueError("No validated records; preserving previous snapshot")
-    snapshot={"status":"official","source":API,"generated_at":datetime.now(timezone.utc).isoformat(timespec="seconds"),"scope":f"Selected orgaoSuperior codes {', '.join(codes)}; up to {pages} page(s) per code, not national totals","year":year,"records":records}
+            if payload == []:
+                break
+            normalized=normalize(payload,year,code)
+            fetched_pages+=1
+            for row in normalized:
+                # The endpoint returns a summary per agency and year.
+                identity=(row["codigo"],row["ano"])
+                if identity in seen:
+                    raise ValueError(
+                        f"Duplicate agency/year {identity}; inspect pagination before publishing"
+                    )
+                seen.add(identity)
+                records.append(row)
+        fetches.append({"orgao_superior":code,"pages_with_data":fetched_pages})
+    if not records:
+        raise ValueError("No validated records; preserving previous snapshot")
+    # These are per-agency summaries from selected API pages,
+    # not national totals or an exhaustive list of agencies.
+    scope=(
+        f"Partial CGU API sample: {', '.join(codes)} (orgaoSuperior); "
+        f"up to {pages} page(s) per code; {requests} request(s). "
+        "Not complete national expenditure."
+    )
+    snapshot={
+        "status":"official","source":API,
+        "generated_at":datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "scope":scope,"year":year,"records":records,
+        "coverage":{"orgao_superior_codes":codes,"page_limit_per_code":pages,
+                    "requested_pages":requests,"pages_with_data":fetches,
+                    "record_count":len(records),"complete":False}
+    }
     OUT.parent.mkdir(exist_ok=True)
     temp=OUT.with_suffix(".tmp")
     temp.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")

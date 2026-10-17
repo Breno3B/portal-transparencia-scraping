@@ -14,12 +14,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install test dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run Python tests
+        run: python -m unittest discover -s tests -v
       - name: Fetch and validate official snapshot
         env:
           CGU_API_KEY: ${{ secrets.CGU_API_KEY }}
           CGU_YEAR: '2025'
-          CGU_ORGAOS: '26000'
-          CGU_MAX_PAGES: '1'
+          CGU_ORGAOS: '26000,25000'
+          CGU_MAX_PAGES: '2'
+          CGU_REQUEST_DELAY_SECONDS: '1.5'
         run: |
           if [ -z "$CGU_API_KEY" ]; then
             echo "CGU_API_KEY is not set. Skipping refresh; published sample remains."
