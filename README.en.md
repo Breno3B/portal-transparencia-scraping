@@ -2,6 +2,8 @@
 
 [🇧🇷 Português](README.md) | 🇺🇸 **English**
 
+🌐 **[Bilingual GitHub Pages dashboard](https://breno3b.github.io/portal-transparencia-scraping/en/)** — searchable, sortable JSON snapshot. Data is synthetic until a validated CGU API refresh is configured. [Setup guide](docs/pages-setup.md).
+
 Python project for collecting public federal expenditure data and exposing it through a simple API. Originally developed for an **Agilize backend technical challenge**, and later revisited as a backend maintenance and code-quality exercise.
 
 ## Overview
@@ -47,7 +49,7 @@ The API represents monetary values as decimal strings to avoid precision loss.
 
 ## Development history
 
-The initial challenge implementation is preserved at [`archive/original-challenge-2022`](https://github.com/Breno3B/Web-Scraping/tree/archive/original-challenge-2022). Subsequent updates improve SQL parameterization, identifier validation, transaction handling, resource cleanup, API routing, and unit testing.
+The initial challenge implementation is preserved at [`archive/original-challenge-2022`](https://github.com/Breno3B/portal-transparencia-scraping/tree/archive/original-challenge-2022). Subsequent updates improve SQL parameterization, identifier validation, transaction handling, resource cleanup, API routing, and unit testing.
 
 See the [original project notes](PROJETO.md) and [challenge statement](https://github.com/Debora1Allen/backend-challenge). This repository remains marked as a fork.
 

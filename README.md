@@ -2,6 +2,8 @@
 
 🇧🇷 **Português** | [🇺🇸 English](README.en.md)
 
+🌐 **[Dashboard bilíngue no GitHub Pages](https://breno3b.github.io/portal-transparencia-scraping/)** — pesquisa e ordenação sobre dados publicados em JSON. Inicialmente, os valores são fictícios; a atualização oficial exige um token CGU e validação do esquema de resposta. [Configuração](docs/pages-setup.md).
+
 Projeto Python de coleta e consulta de dados públicos de despesas federais, desenvolvido originalmente como **desafio técnico da Agilize**. A implementação foi posteriormente revisada como exercício de manutenção e boas práticas de backend.
 
 ## Visão geral
@@ -47,7 +49,7 @@ Os valores monetários da API são serializados como strings decimais para evita
 
 ## Evolução
 
-A solução original foi preservada em [`archive/original-challenge-2022`](https://github.com/Breno3B/Web-Scraping/tree/archive/original-challenge-2022). As melhorias incluem consultas SQL parametrizadas para os valores, validação de identificadores, transação para gravação em lote, ciclo de vida dos recursos, rota Flask correspondente ao desafio, e testes unitários.
+A solução original foi preservada em [`archive/original-challenge-2022`](https://github.com/Breno3B/portal-transparencia-scraping/tree/archive/original-challenge-2022). As melhorias incluem consultas SQL parametrizadas para os valores, validação de identificadores, transação para gravação em lote, ciclo de vida dos recursos, rota Flask correspondente ao desafio, e testes unitários.
 
 Leia também [a descrição original do projeto](PROJETO.md) e [o enunciado do desafio](https://github.com/Debora1Allen/backend-challenge). O código permanece identificado como um fork.
 
