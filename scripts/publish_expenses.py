@@ -15,11 +15,45 @@ from decimal import Decimal, InvalidOperation
 
 API="https://api.portaldatransparencia.gov.br/api-de-dados/despesas/por-orgao"
 OUT=pathlib.Path("data/expenses.json")
+def parse_amount(raw):
+    """Parse JSON numbers and Brazilian/US-formatted monetary strings.
+
+    Examples: 1234.56, "1.234,56", "1,234.56", "R$ 1.234,56".
+    Fail closed on missing, ambiguous, or malformed values.
+    """
+    if isinstance(raw, bool) or raw is None:
+        raise ValueError("Missing or invalid monetary amount")
+    if isinstance(raw, (int, float, Decimal)):
+        number = Decimal(str(raw))
+    elif isinstance(raw, str):
+        cleaned = re.sub(r"\\s+", "", raw.replace("\\u00a0", "")).replace("R$", "")
+        if not cleaned or not re.fullmatch(r"-?[0-9.,]+", cleaned):
+            raise ValueError("Invalid monetary string")
+        if "," in cleaned and "." in cleaned:
+            if cleaned.rfind(",") > cleaned.rfind("."):
+                cleaned = cleaned.replace(".", "").replace(",", ".")
+            else:
+                cleaned = cleaned.replace(",", "")
+        elif "," in cleaned:
+            if cleaned.count(",") == 1:
+                cleaned = cleaned.replace(",", ".")
+            else:
+                cleaned = cleaned.replace(",", "")
+        elif cleaned.count(".") > 1:
+            cleaned = cleaned.replace(".", "")
+        number = Decimal(cleaned)
+    else:
+        raise ValueError("Unsupported monetary type")
+    if not number.is_finite():
+        raise ValueError("Non-finite monetary amount")
+    return float(number)
+
+
 def value(item, *keys):
     for key in keys:
         if item.get(key) is not None:
             try:
-                return float(Decimal(str(item[key]).replace(",", ".")))
+                return parse_amount(item[key])
             except (InvalidOperation, ValueError, TypeError) as exc:
                 raise ValueError(
                     f"Invalid numeric field {key}: type={type(item[key]).__name__}; "
