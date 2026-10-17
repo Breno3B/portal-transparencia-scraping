@@ -1,0 +1,39 @@
+name: Refresh public expenditure snapshot
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '24 9 * * 1'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch and validate official snapshot
+        env:
+          CGU_API_KEY: ${{ secrets.CGU_API_KEY }}
+          CGU_YEAR: '2025'
+          CGU_ORGAOS: '26000'
+          CGU_MAX_PAGES: '1'
+        run: |
+          if [ -z "$CGU_API_KEY" ]; then
+            echo "CGU_API_KEY is not set. Skipping refresh; published sample remains."
+            exit 0
+          fi
+          python scripts/publish_expenses.py
+      - name: Commit validated snapshot if changed
+        run: |
+          if git diff --quiet -- data/expenses.json; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/expenses.json
+          git commit -m "Refresh validated CGU public expenditure snapshot"
+          git push

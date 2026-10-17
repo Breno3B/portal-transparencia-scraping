@@ -1,0 +1,33 @@
+{
+  "status": "sample",
+  "source": "Synthetic educational fixture — not CGU",
+  "generated_at": null,
+  "scope": "3 invented agency examples (not actual organizations or public expenditure)",
+  "year": 2025,
+  "records": [
+    {
+      "codigo": "DEMO01",
+      "orgao": "Órgão Fictício Alfa",
+      "ano": 2025,
+      "empenhado": 350000,
+      "liquidado": 280000,
+      "pago": 260000
+    },
+    {
+      "codigo": "DEMO02",
+      "orgao": "Órgão Fictício Beta",
+      "ano": 2025,
+      "empenhado": 460000,
+      "liquidado": 410000,
+      "pago": 400000
+    },
+    {
+      "codigo": "DEMO03",
+      "orgao": "Órgão Fictício Gama",
+      "ano": 2025,
+      "empenhado": 200000,
+      "liquidado": 175000,
+      "pago": 165000
+    }
+  ]
+}
