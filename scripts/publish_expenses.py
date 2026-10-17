@@ -26,7 +26,7 @@ def parse_amount(raw):
     if isinstance(raw, (int, float, Decimal)):
         number = Decimal(str(raw))
     elif isinstance(raw, str):
-        cleaned = re.sub(r"\\s+", "", raw.replace("\\u00a0", "")).replace("R$", "")
+        cleaned = "".join(raw.replace("R$", "").split())
         if not cleaned or not re.fullmatch(r"-?[0-9.,]+", cleaned):
             raise ValueError("Invalid monetary string")
         if "," in cleaned and "." in cleaned:
