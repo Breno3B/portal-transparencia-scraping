@@ -58,8 +58,17 @@ def main():
             try:
                 with urllib.request.urlopen(req,timeout=35) as res:
                     payload=json.load(res)
-            except (urllib.error.HTTPError,urllib.error.URLError) as exc:
-                raise RuntimeError("CGU API request failed; existing snapshot will remain unchanged") from exc
+            except urllib.error.HTTPError as exc:
+                # Do not log request URLs or response bodies.
+                raise RuntimeError(
+                    f"CGU API returned HTTP {exc.code} for agency {code}, page {page}; "
+                    "previous snapshot preserved"
+                ) from exc
+            except urllib.error.URLError as exc:
+                raise RuntimeError(
+                    f"CGU API connection failed ({type(exc.reason).__name__}); "
+                    "previous snapshot preserved"
+                ) from exc
             if payload==[]:break
             records.extend(normalize(payload,year,code))
     if not records:raise ValueError("No validated records; preserving previous snapshot")
