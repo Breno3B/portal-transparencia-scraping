@@ -21,7 +21,10 @@ def value(item, *keys):
             try:
                 return float(Decimal(str(item[key]).replace(",", ".")))
             except (InvalidOperation, ValueError, TypeError) as exc:
-                raise ValueError(f"Invalid numeric field {key}") from exc
+                raise ValueError(
+                    f"Invalid numeric field {key}: type={type(item[key]).__name__}; "
+                    f"available fields={sorted(str(k) for k in item.keys())}"
+                ) from exc
     raise ValueError(f"Missing amount field, expected one of: {keys}")
 def normalize(rows, year, code):
     if not isinstance(rows,list) or not rows:
