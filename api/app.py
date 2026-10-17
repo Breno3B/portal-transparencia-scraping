@@ -1,36 +1,40 @@
+"""Read-only Flask API for the scraped records."""
 import os
-import dotenv
-import json
-from flask import Flask
-from storage.connection import db_connection
+from decimal import Decimal
+from flask import Flask, jsonify
+from dotenv import load_dotenv
+from storage.connection import db_connection, identifier
 
-dotenv.load_dotenv()
-DB_NAME = os.getenv("DB_NAME")
-TABLE_NAME = os.getenv("TABLE_NAME")
+load_dotenv()
 
-connection = db_connection()
+def create_app(connection_factory=db_connection):
+    app = Flask(__name__)
 
-app = Flask(__name__)
+    @app.get("/api/dados")
+    def expenses():
+        database = identifier(os.getenv("DB_NAME", "agilize"))
+        table = identifier(os.getenv("TABLE_NAME", "expense"))
+        connection = connection_factory()
+        try:
+            cursor = connection.cursor(dictionary=True)
+            try:
+                cursor.execute(f"SELECT mes_ano, programa_orcamentario, acao_orcamentaria, "
+                               f"valor_empenhado, valor_liquidado, valor_pago, "
+                               f"valor_restos_a_pagar_pagos FROM `{database}`.`{table}`")
+                records = cursor.fetchall()
+                for record in records:
+                    for key, value in record.items():
+                        if isinstance(value, Decimal):
+                            record[key] = str(value)
+                return jsonify(records)
+            finally:
+                cursor.close()
+        finally:
+            connection.close()
 
+    return app
 
-@app.route('/')
-def expenses_per_organ():
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute(f"USE {DB_NAME}")
-    sql_query = f"""
-        SELECT
-            mes_ano,
-            programa_orcamentario,
-            acao_orcamentaria,
-            CAST(valor_empenhado AS CHAR(100)) AS valor_empenhado,
-            CAST(valor_liquidado AS CHAR(100)) AS valor_liquidado,
-            CAST(valor_pago AS CHAR(100)) AS valor_pago,
-            CAST(valor_restos_a_pagar_pagos AS CHAR(100))
-                AS valor_restos_a_pagar_pagos
-        FROM {DB_NAME}.{TABLE_NAME};"""
-    cursor.execute(sql_query)
-    result = cursor.fetchall()
-    return json.dumps(result, indent=4)
+app = create_app()
 
-
-app.run()
+if __name__ == "__main__":
+    app.run(debug=False)

@@ -1,20 +1,21 @@
+"""MySQL connection and strict identifier validation."""
 import os
+import re
 import mysql.connector
-import dotenv
+from dotenv import load_dotenv
 
-dotenv.load_dotenv()
+load_dotenv()
 
+def identifier(value):
+    if not value or re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]*", value) is None:
+        raise ValueError(f"Invalid SQL identifier: {value!r}")
+    return value
 
 def db_connection():
-    try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user=os.getenv("DB_USER"),
-            password=os.getenv("PASSWORD"),
-        )
-        if connection.is_connected():
-            db_Info = connection.get_server_info()
-            print("Connected to MySQL Server version ", db_Info, '\n')
-            return connection
-    except mysql.connector.Error as e:
-        print("Error while connecting to MySQL", e)
+    return mysql.connector.connect(
+        host=os.getenv("DB_HOST", "localhost"),
+        port=int(os.getenv("DB_PORT", "3306")),
+        user=os.environ["DB_USER"],
+        password=os.environ["PASSWORD"],
+        database=None,
+    )

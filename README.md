@@ -1,52 +1,56 @@
+# Web Scraping — Portal da Transparência
 
-# Web Scraping
+🇧🇷 **Português** | [🇺🇸 English](README.en.md)
 
-O web scraping (raspagem de rede, em tradução livre), também conhecido como extração de dados da web,
-é o nome dado ao processo de coleta de dados estruturados da web de maneira automatizada. Em geral,
-esse método é usado por pessoas, empresas que desejam usar a vasta quantidade de dados da web disponíveis
-publicamente para tomar decisões mais inteligentes.
+Projeto Python de coleta e consulta de dados públicos de despesas federais, desenvolvido originalmente como **desafio técnico da Agilize**. A implementação foi posteriormente revisada como exercício de manutenção e boas práticas de backend.
 
-## O desafio
+## Visão geral
 
-- Fazer um *web scraping* da tabela de dados do [Portal da Transparência do Governo Federal](https://www.transparencia.gov.br/despesas/orgao?ordenarPor=orgaoSuperior&direcao=asc)
-- armazenar num banco de dados relacional
-- fornecer um endpoint (/api/dados) que retorne um json com os dados coletados:
-    - Estrutura do retorno da API:
-        - mes_ano
-        - programa_orcamentario
-        - acao_orcamentaria
-        - valor_empenhado
-        - valor_liquidado
-        - valor_pago
-        - valor_restos_a_pagar_pagos
+- **Selenium** acessa a página de despesas no Portal da Transparência.
+- **Pandas** interpreta uma tabela HTML renderizada.
+- **MySQL** armazena os registros de despesa.
+- **Flask** disponibiliza `GET /api/dados`, retornando JSON.
 
-**Bônus**: Fazer o scraping de todas as páginas da tabela do site
+**Tecnologias:** Python, Selenium, Pandas, MySQL, Flask, pytest/unittest (testes com `unittest`).
 
-A tabela de dados para o scraping fica em (ver print abaixo):
+## Início rápido
 
-[https://www.transparencia.gov.br/despesas/orgao?ordenarPor=orgaoSuperior&direcao=asc](https://www.transparencia.gov.br/despesas/orgao?ordenarPor=orgaoSuperior&direcao=asc)
+Requer Python compatível com as dependências, MySQL e Chrome/ChromeDriver disponíveis.
 
-![Untitled](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3f510b40-b623-4a19-abfd-bde02ade14bb%2FUntitled.png?table=block&id=fae53644-6d4c-47b0-8697-45ffc3f8be8c&spaceId=53665a91-e421-49de-b437-e4b5018c879a&width=1880&userId=9595c958-022c-4858-8cd0-6e6019d87b83&cache=v2)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
 
-## Sugestões
+Configure as variáveis do arquivo `.env` e crie um banco acessível com o usuário configurado. Em dois terminais:
 
-- Preferencialmente utilize PHP, mas esteja livre para usar qualquer linguagem
-- Sugerimos usar docker para facilitar o desenvolvimento e a avaliação do resultado
-- Faça um segundo README com o nome PROJETO.md explicando o que foi feito, como forma de documentação.
-- Diferenciais:
-  - Boa documentação
-  - Testes unitários modulares
+```bash
+python -m backend.crawler
+python -m api.app
+```
 
-## Como você deve nos enviar sua solução?
+Consulte `http://127.0.0.1:5000/api/dados`.
 
-Faça um clone deste projeto, crie uma branch com seu **nome-sobrenome** e ao finalizar abra um pull-request para que um avaliador da agilize possa visualizar
-e envie um e-mail para [dev@agilize.com.br](mailto:dev@agilize.com.br) com o assunto: **[DESAFIO BACKEND AGZ] + Finalizado + (nome-da-branch)**
+**Testes:**
 
+```bash
+python -m unittest discover -s tests -v
+```
 
-## Como abrir um pull request
-- Passo 1: Fazer um fork do projeto
-- Passo 2: Clonar seu fork para o seu computador
-- Passo 3: Fazer o projeto em sua branch
-- Passo 4: Abrir o pull request
+## Limitações importantes
 
-Para mais detalhes esse [link](https://www.webdevdrops.com/como-criar-um-pull-request-no-github-passo-a-passo/) tem uma explicação bastante completa
+Este é um projeto de estudo, **não um serviço em produção**. O HTML do Portal pode mudar; o seletor `TABLE_SELECTOR` e o mapeamento das colunas no código precisam ser conferidos com a página atual. A extração captura a primeira tabela HTML encontrada e **não implementa paginação completa**. A execução depende de navegador, driver e acesso ao MySQL. Testes de integração contra o portal não fazem parte da suíte unitária.
+
+Os valores monetários da API são serializados como strings decimais para evitar perdas de precisão.
+
+## Evolução
+
+A solução original foi preservada em [`archive/original-challenge-2022`](../../tree/archive/original-challenge-2022). As melhorias incluem consultas SQL parametrizadas para os valores, validação de identificadores, transação para gravação em lote, ciclo de vida dos recursos, rota Flask correspondente ao desafio, e testes unitários.
+
+Leia também [a descrição original do projeto](PROJETO.md) e [o enunciado do desafio](https://github.com/Debora1Allen/backend-challenge). O código permanece identificado como um fork.
+
+## Autor
+
+[Breno Rodrigues Magalhães](https://github.com/Breno3B)
