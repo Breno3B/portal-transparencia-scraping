@@ -47,7 +47,7 @@ The API represents monetary values as decimal strings to avoid precision loss.
 
 ## Development history
 
-The initial challenge implementation is preserved at [`archive/original-challenge-2022`](../../tree/archive/original-challenge-2022). Subsequent updates improve SQL parameterization, identifier validation, transaction handling, resource cleanup, API routing, and unit testing.
+The initial challenge implementation is preserved at [`archive/original-challenge-2022`](https://github.com/Breno3B/Web-Scraping/tree/archive/original-challenge-2022). Subsequent updates improve SQL parameterization, identifier validation, transaction handling, resource cleanup, API routing, and unit testing.
 
 See the [original project notes](PROJETO.md) and [challenge statement](https://github.com/Debora1Allen/backend-challenge). This repository remains marked as a fork.
 
