@@ -1,33 +1,129 @@
 {
-  "status": "sample",
-  "source": "Synthetic educational fixture — not CGU",
-  "generated_at": null,
-  "scope": "3 invented agency examples (not actual organizations or public expenditure)",
+  "status": "official",
+  "source": "https://api.portaldatransparencia.gov.br/api-de-dados/despesas/por-orgao",
+  "generated_at": "2026-10-17T02:52:26+00:00",
+  "scope": "Selected orgaoSuperior codes 26000; up to 1 page(s) per code, not national totals",
   "year": 2025,
   "records": [
     {
-      "codigo": "DEMO01",
-      "orgao": "Órgão Fictício Alfa",
+      "codigo": "26298",
+      "orgao": "Fundo Nacional de Desenvolvimento da Educação",
       "ano": 2025,
-      "empenhado": 350000,
-      "liquidado": 280000,
-      "pago": 260000
+      "empenhado": 108009379079.09,
+      "liquidado": 89827582494.87,
+      "pago": 89780195466.0
     },
     {
-      "codigo": "DEMO02",
-      "orgao": "Órgão Fictício Beta",
+      "codigo": "26443",
+      "orgao": "Empresa Brasileira de Serviços Hospitalares",
       "ano": 2025,
-      "empenhado": 460000,
-      "liquidado": 410000,
-      "pago": 400000
+      "empenhado": 14616615279.79,
+      "liquidado": 12588155760.58,
+      "pago": 11939397806.56
     },
     {
-      "codigo": "DEMO03",
-      "orgao": "Órgão Fictício Gama",
+      "codigo": "26291",
+      "orgao": "Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior",
       "ano": 2025,
-      "empenhado": 200000,
-      "liquidado": 175000,
-      "pago": 165000
+      "empenhado": 5592146570.85,
+      "liquidado": 5426452780.45,
+      "pago": 5411819413.81
+    },
+    {
+      "codigo": "26245",
+      "orgao": "Universidade Federal do Rio de Janeiro",
+      "ano": 2025,
+      "empenhado": 5006392279.92,
+      "liquidado": 4951934718.36,
+      "pago": 4445179455.2
+    },
+    {
+      "codigo": "26238",
+      "orgao": "Universidade Federal de Minas Gerais",
+      "ano": 2025,
+      "empenhado": 3270897885.14,
+      "liquidado": 3223994931.75,
+      "pago": 2902523633.98
+    },
+    {
+      "codigo": "26236",
+      "orgao": "Universidade Federal Fluminense",
+      "ano": 2025,
+      "empenhado": 3127404811.93,
+      "liquidado": 3085599657.93,
+      "pago": 2833626897.4
+    },
+    {
+      "codigo": "26232",
+      "orgao": "Universidade Federal da Bahia",
+      "ano": 2025,
+      "empenhado": 2706510716.72,
+      "liquidado": 2658588072.74,
+      "pago": 2457194589.54
+    },
+    {
+      "codigo": "26271",
+      "orgao": "Fundação Universidade de Brasília",
+      "ano": 2025,
+      "empenhado": 2770840892.88,
+      "liquidado": 2608741041.09,
+      "pago": 2399438956.2
+    },
+    {
+      "codigo": "26246",
+      "orgao": "Universidade Federal de Santa Catarina",
+      "ano": 2025,
+      "empenhado": 2677639750.63,
+      "liquidado": 2590390386.92,
+      "pago": 2325975151.14
+    },
+    {
+      "codigo": "26244",
+      "orgao": "Universidade Federal do Rio Grande do Sul",
+      "ano": 2025,
+      "empenhado": 2600082880.71,
+      "liquidado": 2559472593.8,
+      "pago": 2312853849.4
+    },
+    {
+      "codigo": "26241",
+      "orgao": "Universidade Federal do Paraná",
+      "ano": 2025,
+      "empenhado": 2534498675.65,
+      "liquidado": 2496027859.44,
+      "pago": 2285244549.66
+    },
+    {
+      "codigo": "26242",
+      "orgao": "Universidade Federal de Pernambuco",
+      "ano": 2025,
+      "empenhado": 2561721465.86,
+      "liquidado": 2492881156.54,
+      "pago": 2238367479.85
+    },
+    {
+      "codigo": "26240",
+      "orgao": "Universidade Federal da Paraíba",
+      "ano": 2025,
+      "empenhado": 2582397134.9,
+      "liquidado": 2511213784.53,
+      "pago": 2224803083.92
+    },
+    {
+      "codigo": "26243",
+      "orgao": "Universidade Federal do Rio Grande do Norte",
+      "ano": 2025,
+      "empenhado": 2537299606.4,
+      "liquidado": 2450314257.2,
+      "pago": 2176812340.25
+    },
+    {
+      "codigo": "26294",
+      "orgao": "Hospital de Clínicas de Porto Alegre",
+      "ano": 2025,
+      "empenhado": 2456048215.8,
+      "liquidado": 2320873002.35,
+      "pago": 2081922450.19
     }
   ]
 }
