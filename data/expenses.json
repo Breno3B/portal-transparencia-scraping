@@ -1,7 +1,7 @@
 {
   "status": "official",
   "source": "https://api.portaldatransparencia.gov.br/api-de-dados/despesas/por-orgao",
-  "generated_at": "2026-10-19T16:33:17+00:00",
+  "generated_at": "2026-10-26T16:13:13+00:00",
   "scope": "Partial CGU API sample: 26000, 25000 (orgaoSuperior); up to 2 page(s) per code; 4 request(s). Not complete national expenditure.",
   "year": 2025,
   "records": [
